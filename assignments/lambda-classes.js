@@ -1,4 +1,4 @@
-// CODE here for your Lambda Classes
+// Base class
 class Person {
   constructor(attrs) {
     this.name = attrs.name;
@@ -11,6 +11,7 @@ class Person {
   }
 }
 
+// Create 2 new objects
 const doug = new Person({
   name: 'Doug',
   age: 32,
@@ -23,6 +24,7 @@ const susie = new Person({
   location: 'Atlanta',
 });
 
+// Test class works by logging 2 objects and their methods
 console.log(doug);
 console.log(doug.speak());
 console.log(susie);
@@ -45,11 +47,13 @@ class Instructor extends Person {
     console.log(`${student.name} receives a perfect score on ${subject}`);
   }
 
+  // Instructor gives a random grade between 65 and 100
   static giveGrade() {
     return Math.floor((Math.random() * 65) + 35);
   }
 }
 
+// Create 2 new objects
 const george = new Instructor({
   name: 'George',
   age: 23,
@@ -68,6 +72,7 @@ const alexis = new Instructor({
   catchPhrase: 'Mmmm pasta',
 });
 
+// Test class works by logging 2 objects and their methods
 console.log(george);
 Instructor.demo('Linux');
 Instructor.grade(susie, 'Databases');
@@ -75,6 +80,7 @@ Instructor.grade(susie, 'Databases');
 console.log(alexis);
 Instructor.demo('Assembly');
 Instructor.grade(doug, 'CSS');
+
 
 class Student extends Person {
   constructor(attrs) {
@@ -98,11 +104,13 @@ class Student extends Person {
     console.log(`${this.name} has begun sprint challenge on ${subject}`);
   }
 
+  // A new grade is calculated by logging a new grade, then averaging it with the current grade.
   calculateGrade(newGrade) {
     console.log(`Scout received a ${newGrade} on her latest test`);
     this.grade = Math.floor((this.grade + newGrade) / 2);
   }
 
+  // Student will graduate as soon as their grade rises above 70 and the school loop will end
   graduate() {
     if (this.grade > 70) {
       console.log(`${this.name}, you are ready to graduate!`);
@@ -113,6 +121,7 @@ class Student extends Person {
   }
 }
 
+// Create 2 new objects
 const liz = new Student({
   name: 'Liz',
   age: 26,
@@ -143,6 +152,7 @@ const scout = new Student({
   status: 'In school',
 });
 
+// Test class works by logging 2 objects and their methods
 console.log(liz);
 liz.listsSubjects();
 liz.PRAssignment('Advanced CSS');
@@ -153,10 +163,21 @@ scout.listsSubjects();
 scout.PRAssignment('Linear Algebra');
 scout.sprintChallenge('Basic HTML');
 
+/*
+ School Loop
+ While Scout is still in school, she will receive new grades. Once her grade average exceeds 70,
+ she can graduate
+ */
 while (scout.status !== 'Graduated') {
+  // Scout's grade is calculated after receiving a new grade
   scout.calculateGrade(Instructor.giveGrade());
+  /*
+   Scout's score is checked. If it's high enough, her status changes to 'Graduated' and she leaves
+   school.
+   */
   scout.graduate();
 }
+
 
 class ProjectManager extends Instructor {
   constructor(attrs) {
@@ -174,6 +195,7 @@ class ProjectManager extends Instructor {
   }
 }
 
+// Create 2 new objects
 const dory = new ProjectManager({
   name: 'Dory',
   age: 37,
@@ -196,6 +218,7 @@ const johnny = new ProjectManager({
   favInstructor: 'Tuna the Cat',
 });
 
+// Test class works by logging 2 objects and their methods
 console.log(dory);
 dory.standUp('WebPT9');
 dory.debugsCode(liz, 'HTML');
