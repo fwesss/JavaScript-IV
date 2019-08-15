@@ -44,6 +44,10 @@ class Instructor extends Person {
   static grade(student, subject) {
     console.log(`${student.name} receives a perfect score on ${subject}`);
   }
+
+  static giveGrade() {
+    return Math.floor((Math.random() * 65) + 35);
+  }
 }
 
 const george = new Instructor({
@@ -79,6 +83,7 @@ class Student extends Person {
     this.className = attrs.className;
     this.favSubjects = attrs.favSubjects;
     this.grade = attrs.grade;
+    this.status = attrs.status;
   }
 
   listsSubjects() {
@@ -91,6 +96,20 @@ class Student extends Person {
 
   sprintChallenge(subject) {
     console.log(`${this.name} has begun sprint challenge on ${subject}`);
+  }
+
+  calculateGrade(newGrade) {
+    console.log(`Scout received a ${newGrade} on her latest test`);
+    this.grade = Math.floor((this.grade + newGrade) / 2);
+  }
+
+  graduate() {
+    if (this.grade > 70) {
+      console.log(`${this.name}, you are ready to graduate!`);
+      this.status = 'Graduated';
+    } else {
+      console.log(`Your grade is ${this.grade}. You'll need to keep studying :(`);
+    }
   }
 }
 
@@ -106,6 +125,7 @@ const liz = new Student({
     'Political Science',
   ],
   grade: 97,
+  status: 'In school',
 });
 
 const scout = new Student({
@@ -119,7 +139,8 @@ const scout = new Student({
     'Naptime',
     'Machine Learning',
   ],
-  grade: 82,
+  grade: 62,
+  status: 'In school',
 });
 
 console.log(liz);
@@ -131,6 +152,11 @@ console.log(scout);
 scout.listsSubjects();
 scout.PRAssignment('Linear Algebra');
 scout.sprintChallenge('Basic HTML');
+
+while (scout.status !== 'Graduated') {
+  scout.calculateGrade(Instructor.giveGrade());
+  scout.graduate();
+}
 
 class ProjectManager extends Instructor {
   constructor(attrs) {
