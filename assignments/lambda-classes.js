@@ -78,6 +78,7 @@ class Student extends Person {
     this.previousBackground = attrs.previousBackground;
     this.className = attrs.className;
     this.favSubjects = attrs.favSubjects;
+    this.grade = attrs.grade;
   }
 
   listsSubjects() {
@@ -104,6 +105,7 @@ const liz = new Student({
     'Psychology',
     'Political Science',
   ],
+  grade: 97,
 });
 
 const scout = new Student({
@@ -117,6 +119,7 @@ const scout = new Student({
     'Naptime',
     'Machine Learning',
   ],
+  grade: 82,
 });
 
 console.log(liz);
